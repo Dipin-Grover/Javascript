@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Call Notes</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+    <link rel="stylesheet" href="./7.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- Left Controls -->
+    <div class="controls">
+        <button class="control-btn add-btn">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+
+        <button class="control-btn prev-btn" id="prev_btn">
+            <i class="fa-solid fa-arrow-up" ></i>
+        </button>
+
+        <button class="control-btn next-btn" id="next_btn">
+            <i class="fa-solid fa-arrow-down" ></i>
+        </button>
+    </div>
+
+
+    <!-- Card Stack -->
+    <div class="card-stack">
+
+        <!-- Active Card -->
+        <!-- <div class="call-card active">
+
+            <div class="card-top">
+                <img src="data:image/jpeg;base64,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" alt="">
+                <h2>Fatima Uma</h2>
+            </div>
+
+            <div class="details">
+                <div>
+                    <p>Home Town</p>
+                    <p>Bookings</p>
+                </div>
+
+                <div class="right-text">
+                    <p>Singapore</p>
+                    <p>3 times</p>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="call">
+                    <i class="fa-solid fa-phone"></i>
+                    Call
+                </button>
+
+                <button class="message">
+                    Message
+                </button>
+            </div>
+
+        </div> -->
+
+
+        <!-- Second Card -->
+        <!-- <div class="call-card second"></div> -->
+
+        <!-- Third Card -->
+        <!-- <div class="call-card third"></div> -->
+
+    </div>
+
+
+    <!-- Priority Dots -->
+    <div class="priority-indicator">
+
+        <span class="priority emergency"></span>
+
+        <span class="priority important"></span>
+
+        <span class="priority urgent"></span>
+
+        <span class="priority norush"></span>
+
+    </div>
+
+
+    <!-- Popup Form -->
+    <div class="form-overlay">
+
+        <form class="note-form">
+
+            <h2>New Call</h2>
+
+            <input type="text" placeholder="Image URL" required class="image_url">
+
+            <input type="text" placeholder="Full Name" required class="full_name">
+
+            <input type="text" placeholder="Home Town" required class="home_town">
+
+            <input type="text" placeholder="Purpose" required class="purpose">
+
+            <div class="category">
+
+                <label>
+                    <input type="radio" name="priority" required value="Emergency">
+                    Emergency
+                </label>
+
+                <label>
+                    <input type="radio" name="priority" value="Important">
+                    Important
+                </label>
+
+                <label>
+                    <input type="radio" name="priority" value="Urgent">
+                    Urgent
+                </label>
+
+                <label>
+                    <input type="radio" name="priority" value="No Rush">
+                    No Rush
+                </label>
+
+            </div>
+
+            <button class="create-btn" type="button" >
+                Create Note
+            </button>
+
+            <button class="close-btn" >
+                Close
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="./7.js"></script>
+</body>
+</html>
